@@ -24,6 +24,26 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+
+
+//FCC Answer: Header Parser Microservice code, using req.ip for ipaddress, req.headers['accept-language'] for client computer preferred language, and req.headers['user-agent'] for client software then sending response with information complete. (Can also use navigator.languages for language req.headers['accept-language'] is preferred if correct)
+
+app.get("/api/whoami", (req, res) => {
+  const ip = req.ip; 
+  const browserLanguage = req.headers['accept-language']
+  // const browserLanguage = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language; 
+  const software = req.headers['user-agent']
+  console.log(ip)
+  res.json({
+    ipaddress: ip, 
+    language: browserLanguage, 
+    software: software
+  })
+})
+
+
+
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
